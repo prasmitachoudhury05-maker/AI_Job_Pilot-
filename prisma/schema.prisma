@@ -1,0 +1,260 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                 Int       @id @default(autoincrement())
+  email              String    @unique
+  hashedPassword     String
+  fullName           String?
+  isActive           Boolean   @default(true)
+  isVerified         Boolean   @default(false)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  // Profile fields
+  phone              String?
+  location           String?
+  linkedinUrl        String?
+  githubUrl          String?
+  portfolioUrl       String?
+
+  candidate          Candidate?
+  tailoringSessions  TailoringSession[]
+  tailoringHistory   TailoringHistory[]
+  generatedDocuments GeneratedDocument[]
+}
+
+model Candidate {
+  id                   Int       @id @default(autoincrement())
+  userId               Int       @unique
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  profileData          String?   // Store JSON as String in SQLite
+  skills               String?   // JSON
+  experience           String?   // JSON
+  education            String?   // JSON
+  completionPercentage Int       @default(0)
+  
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  resumes              Resume[]
+  jobRankings          JobRanking[]
+  applications         Application[]
+  generatedDocuments   GeneratedDocument[]
+}
+
+model Resume {
+  id                 Int       @id @default(autoincrement())
+  candidateId        Int
+  candidate          Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  
+  fileName           String
+  filePath           String
+  fileSize           Int
+  fileType           String
+  
+  parsedContent      String?
+  parsedData         String?   // JSON
+  
+  isActive           Boolean   @default(true)
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  tailoringSessions  TailoringSession[]
+}
+
+model Job {
+  id                 Int       @id @default(autoincrement())
+  
+  title              String
+  companyName        String
+  description        String?
+  
+  location           String?
+  remoteType         String?
+  
+  salaryMin          Int?
+  salaryMax          Int?
+  salaryCurrency     String    @default("USD")
+  
+  jobUrl             String?   @unique
+  source             String?
+  sourceId           String?
+  
+  skills             String?   // JSON
+  preferredSkills    String?   // JSON
+  qualifications     String?   // JSON
+  industry           String?
+  seniority          String?
+  jobType            String?
+  rawData            String?   // JSON
+  sources            String?   // JSON
+  
+  fingerprint        String?
+  isDuplicate        Boolean   @default(false)
+  mergedIntoId       Int?
+  mergedInto         Job?      @relation("JobDuplicates", fields: [mergedIntoId], references: [id])
+  duplicates         Job[]     @relation("JobDuplicates")
+  
+  postedDate         DateTime?
+  scrapedAt          DateTime  @default(now())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  rankings           JobRanking[]
+  applications       Application[]
+  tailoringSessions  TailoringSession[]
+  generatedDocuments GeneratedDocument[]
+}
+
+model JobRanking {
+  id                 Int       @id @default(autoincrement())
+  candidateId        Int
+  candidate          Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  jobId              Int
+  job                Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  
+  skillsScore        Float?
+  experienceScore    Float?
+  locationScore      Float?
+  salaryScore        Float?
+  industryScore      Float?
+  seniorityScore     Float?
+  overallScore       Float?
+  
+  explanation        String?
+  confidenceScore    Float?
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Application {
+  id                 Int       @id @default(autoincrement())
+  candidateId        Int
+  candidate          Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  jobId              Int
+  job                Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  
+  status             String    @default("APPLIED")
+  appliedDate        DateTime  @default(now())
+  notes              String?
+  
+  reminderDate       DateTime?
+  reminderSent       Boolean   @default(false)
+  
+  metadata           String?   // JSON
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  applicationNotes   ApplicationNote[]
+}
+
+model ApplicationNote {
+  id                 Int       @id @default(autoincrement())
+  applicationId      Int
+  application        Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  note               String
+  noteType           String?
+  
+  createdAt          DateTime  @default(now())
+}
+
+model TailoringSession {
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resumeId           Int
+  resume             Resume    @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  jobId              Int?
+  job                Job?      @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  
+  originalResume     String
+  tailoredResume     String
+  jobDescription     String
+  
+  originalAtsScore   Float     @default(0.0)
+  newAtsScore        Float     @default(0.0)
+  scoreImprovement   Float     @default(0.0)
+  
+  changes            String?   // JSON
+  diff               String?
+  
+  jobSkillsMatched   String?   // JSON
+  confidence         Float     @default(0.0)
+  
+  status             String    @default("pending")
+  errorMessage       String?
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  changeLogs         TailoringChangeLog[]
+}
+
+model TailoringChangeLog {
+  id                 Int       @id @default(autoincrement())
+  sessionId          Int
+  session            TailoringSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  changeType         String
+  originalText       String?
+  tailoredText       String?
+  explanation        String?
+  
+  isValid            Boolean   @default(true)
+  validationReason   String?
+  
+  isAccepted         Boolean?
+  userNotes          String?
+  
+  createdAt          DateTime  @default(now())
+}
+
+model TailoringHistory {
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  totalTailorings    Int       @default(0)
+  acceptedChanges    Int       @default(0)
+  rejectedChanges    Int       @default(0)
+  
+  averageScoreImprovement Float @default(0.0)
+  averageConfidence  Float     @default(0.0)
+  
+  mostUsedSkills     String?   // JSON
+  topJobSources      String?   // JSON
+  
+  lastTailoredAt     DateTime?
+  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model GeneratedDocument {
+  id              Int       @id @default(autoincrement())
+  userId          Int
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  candidateId     Int
+  candidate       Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  jobId           Int?
+  job             Job?      @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  
+  documentType    String    // e.g., "COVER_LETTER", "OUTREACH_RECRUITER"
+  content         String
+  tone            String?   // e.g., "Professional", "Enthusiastic"
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
