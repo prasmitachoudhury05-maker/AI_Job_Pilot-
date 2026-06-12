@@ -36,6 +36,7 @@ export default function JobDetailPage() {
   }
 
   const handleSaveJob = async () => {
+    if (!job) return
     try {
       // Save job to localStorage for now (can be replaced with API call later)
       const savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]')

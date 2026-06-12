@@ -28,7 +28,7 @@ describe('SkillsInput', () => {
     const addButton = screen.getByRole('button', { name: /add/i })
     
     await userEvent.type(input, 'Python')
-    fireEvent.click(addButton)
+    await userEvent.click(addButton)
     
     expect(handleChange).toHaveBeenCalledWith(['JavaScript', 'Python'])
   })
@@ -52,7 +52,7 @@ describe('SkillsInput', () => {
     const addButton = screen.getByRole('button', { name: /add/i })
     
     await userEvent.type(input, 'JavaScript')
-    fireEvent.click(addButton)
+    await userEvent.click(addButton)
     
     expect(handleChange).not.toHaveBeenCalled()
   })
@@ -62,17 +62,17 @@ describe('SkillsInput', () => {
     render(<SkillsInput value={[]} onChange={handleChange} />)
     
     const addButton = screen.getByRole('button', { name: /add/i })
-    fireEvent.click(addButton)
+    await userEvent.click(addButton)
     
     expect(handleChange).not.toHaveBeenCalled()
   })
 
-  it('removes a skill when X button is clicked', () => {
+  it('removes a skill when X button is clicked', async () => {
     const handleChange = jest.fn()
     render(<SkillsInput value={['JavaScript', 'Python']} onChange={handleChange} />)
     
     const removeButtons = screen.getAllByRole('button')
-    fireEvent.click(removeButtons[0])
+    await userEvent.click(removeButtons[0])
     
     expect(handleChange).toHaveBeenCalledWith(['Python'])
   })
@@ -96,7 +96,7 @@ describe('SkillsInput', () => {
     const addButton = screen.getByRole('button', { name: /add/i })
     
     await userEvent.type(input, 'Python')
-    fireEvent.click(addButton)
+    await userEvent.click(addButton)
     
     expect(input).toHaveValue('')
   })

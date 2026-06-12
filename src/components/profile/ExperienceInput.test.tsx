@@ -61,13 +61,13 @@ describe('ExperienceInput', () => {
     ]
     render(<ExperienceInput value={experiences} onChange={handleChange} />)
     
-    const deleteButton = screen.getByRole('button')
+    const deleteButton = screen.getByRole('button', { name: /delete experience 1/i })
     fireEvent.click(deleteButton)
     
     expect(handleChange).toHaveBeenCalledWith([])
   })
 
-  it('updates experience field when input changes', async () => {
+  it('updates experience field when input changes', () => {
     const handleChange = jest.fn()
     const experiences = [
       {
@@ -82,8 +82,7 @@ describe('ExperienceInput', () => {
     render(<ExperienceInput value={experiences} onChange={handleChange} />)
     
     const companyInput = screen.getByDisplayValue('Tech Corp')
-    await userEvent.clear(companyInput)
-    await userEvent.type(companyInput, 'New Corp')
+    fireEvent.change(companyInput, { target: { value: 'New Corp' } })
     
     expect(handleChange).toHaveBeenCalledWith([
       expect.objectContaining({

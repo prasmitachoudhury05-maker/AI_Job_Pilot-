@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ProfileForm from './ProfileForm'
 
@@ -62,6 +62,7 @@ describe('ProfileForm', () => {
   it('renders with existing profile data in edit mode', () => {
     const existingProfile = {
       id: 1,
+      user_id: 1,
       title: 'Software Engineer',
       summary: 'Experienced developer',
       phone: '+1234567890',
@@ -73,6 +74,7 @@ describe('ProfileForm', () => {
       experience: [],
       education: [],
       completion_percentage: 50,
+      created_at: '2026-06-12',
     }
     
     render(<ProfileForm mode="edit" existingProfile={existingProfile} onChange={jest.fn()} />)
@@ -101,14 +103,16 @@ describe('ProfileForm', () => {
     
     const titleInput = screen.getByLabelText(/professional title/i)
     const summaryInput = screen.getByLabelText(/professional summary/i)
+    const skillsField = screen.getByTestId('skills-input-field')
     const submitButton = screen.getByRole('button', { name: /create profile/i })
     
     await userEvent.type(titleInput, 'Software Engineer')
     await userEvent.type(summaryInput, 'Test summary')
+    await userEvent.type(skillsField, 'React')
     
     fireEvent.click(submitButton)
     
-    expect(profileService.createProfile).toHaveBeenCalled()
+    await waitFor(() => expect(profileService.createProfile).toHaveBeenCalled())
   })
 
   it('submits form in edit mode', async () => {
@@ -126,12 +130,14 @@ describe('ProfileForm', () => {
     
     const existingProfile = {
       id: 1,
+      user_id: 1,
       title: 'Software Engineer',
       summary: 'Original summary',
       skills: ['JavaScript'],
       experience: [],
       education: [],
       completion_percentage: 30,
+      created_at: '2026-06-12',
     }
     
     const onSuccess = jest.fn()
@@ -145,7 +151,7 @@ describe('ProfileForm', () => {
     
     fireEvent.click(submitButton)
     
-    expect(profileService.updateProfile).toHaveBeenCalled()
+    await waitFor(() => expect(profileService.updateProfile).toHaveBeenCalled())
   })
 
   it('displays validation errors for required fields', async () => {
@@ -186,15 +192,17 @@ describe('ProfileForm', () => {
     
     const titleInput = screen.getByLabelText(/professional title/i)
     const summaryInput = screen.getByLabelText(/professional summary/i)
+    const skillsField = screen.getByTestId('skills-input-field')
     const submitButton = screen.getByRole('button', { name: /create profile/i })
     
     await userEvent.type(titleInput, 'Software Engineer')
     await userEvent.type(summaryInput, 'Test summary')
+    await userEvent.type(skillsField, 'React')
     
     fireEvent.click(submitButton)
     
     // Button should show loading state
-    expect(screen.getByText(/saving/i)).toBeInTheDocument()
+    expect(await screen.findByText(/saving/i)).toBeInTheDocument()
   })
 
   it('displays error message on submission failure', async () => {
@@ -207,15 +215,17 @@ describe('ProfileForm', () => {
     
     const titleInput = screen.getByLabelText(/professional title/i)
     const summaryInput = screen.getByLabelText(/professional summary/i)
+    const skillsField = screen.getByTestId('skills-input-field')
     const submitButton = screen.getByRole('button', { name: /create profile/i })
     
     await userEvent.type(titleInput, 'Software Engineer')
     await userEvent.type(summaryInput, 'Test summary')
+    await userEvent.type(skillsField, 'React')
     
     fireEvent.click(submitButton)
     
     // Error message should be displayed
-    // This would require the promise to resolve/reject
+    expect(await screen.findByText(/profile already exists/i)).toBeInTheDocument()
   })
 
   it('renders skills input component', () => {

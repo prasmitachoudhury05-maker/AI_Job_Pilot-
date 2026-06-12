@@ -30,7 +30,7 @@ export default function EducationInput({ value = [], onChange, className }: Educ
     onChange(value.filter((_, i) => i !== index))
   }
 
-  const updateEducation = (index: number, field: keyof EducationItem, fieldValue: string | number) => {
+  const updateEducation = (index: number, field: keyof EducationItem, fieldValue: any) => {
     const updated = [...value]
     updated[index] = { ...updated[index], [field]: fieldValue }
     onChange(updated)
@@ -44,6 +44,7 @@ export default function EducationInput({ value = [], onChange, className }: Educ
             <h4 className="font-medium text-gray-900">Education {index + 1}</h4>
             <button
               type="button"
+              aria-label={`Delete Education ${index + 1}`}
               onClick={() => removeEducation(index)}
               className="text-red-600 hover:text-red-700"
             >
@@ -51,8 +52,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
             </button>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Institution</label>
+            <label htmlFor={`edu-institution-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Institution</label>
             <input
+              id={`edu-institution-${index}`}
               type="text"
               value={edu.institution}
               onChange={(e) => updateEducation(index, 'institution', e.target.value)}
@@ -62,8 +64,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Degree</label>
+              <label htmlFor={`edu-degree-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Degree</label>
               <input
+                id={`edu-degree-${index}`}
                 type="text"
                 value={edu.degree}
                 onChange={(e) => updateEducation(index, 'degree', e.target.value)}
@@ -72,8 +75,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Field of Study</label>
+              <label htmlFor={`edu-field-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Field of Study</label>
               <input
+                id={`edu-field-${index}`}
                 type="text"
                 value={edu.field_of_study}
                 onChange={(e) => updateEducation(index, 'field_of_study', e.target.value)}
@@ -84,8 +88,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
           </div>
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+              <label htmlFor={`edu-start-date-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
               <input
+                id={`edu-start-date-${index}`}
                 type="date"
                 value={edu.start_date}
                 onChange={(e) => updateEducation(index, 'start_date', e.target.value)}
@@ -93,8 +98,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+              <label htmlFor={`edu-end-date-${index}`} className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
               <input
+                id={`edu-end-date-${index}`}
                 type="date"
                 value={edu.end_date || ''}
                 onChange={(e) => updateEducation(index, 'end_date', e.target.value)}
@@ -102,8 +108,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">GPA</label>
+              <label htmlFor={`edu-gpa-${index}`} className="block text-sm font-medium text-gray-700 mb-1">GPA</label>
               <input
+                id={`edu-gpa-${index}`}
                 type="number"
                 step="0.01"
                 min="0"
@@ -116,8 +123,9 @@ export default function EducationInput({ value = [], onChange, className }: Educ
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label htmlFor={`edu-description-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea
+              id={`edu-description-${index}`}
               value={edu.description || ''}
               onChange={(e) => updateEducation(index, 'description', e.target.value)}
               rows={2}

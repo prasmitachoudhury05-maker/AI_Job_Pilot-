@@ -64,13 +64,13 @@ describe('EducationInput', () => {
     ]
     render(<EducationInput value={educations} onChange={handleChange} />)
     
-    const deleteButton = screen.getByRole('button')
+    const deleteButton = screen.getByRole('button', { name: /delete education 1/i })
     fireEvent.click(deleteButton)
     
     expect(handleChange).toHaveBeenCalledWith([])
   })
 
-  it('updates education field when input changes', async () => {
+  it('updates education field when input changes', () => {
     const handleChange = jest.fn()
     const educations = [
       {
@@ -86,8 +86,7 @@ describe('EducationInput', () => {
     render(<EducationInput value={educations} onChange={handleChange} />)
     
     const institutionInput = screen.getByDisplayValue('University of Tech')
-    await userEvent.clear(institutionInput)
-    await userEvent.type(institutionInput, 'New University')
+    fireEvent.change(institutionInput, { target: { value: 'New University' } })
     
     expect(handleChange).toHaveBeenCalledWith([
       expect.objectContaining({
@@ -146,7 +145,7 @@ describe('EducationInput', () => {
     expect(screen.getByLabelText('Description')).toBeInTheDocument()
   })
 
-  it('handles GPA input correctly', async () => {
+  it('handles GPA input correctly', () => {
     const handleChange = jest.fn()
     const educations = [
       {
@@ -162,8 +161,7 @@ describe('EducationInput', () => {
     render(<EducationInput value={educations} onChange={handleChange} />)
     
     const gpaInput = screen.getByDisplayValue('3.5')
-    await userEvent.clear(gpaInput)
-    await userEvent.type(gpaInput, '3.8')
+    fireEvent.change(gpaInput, { target: { value: '3.8' } })
     
     expect(handleChange).toHaveBeenCalledWith([
       expect.objectContaining({

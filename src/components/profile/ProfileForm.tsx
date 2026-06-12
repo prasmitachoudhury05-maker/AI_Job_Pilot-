@@ -43,8 +43,9 @@ const profileSchema = z.object({
 type ProfileFormData = z.infer<typeof profileSchema>
 
 interface ProfileFormProps {
-  existingProfile?: CandidateProfile
+  existingProfile?: CandidateProfile | null
   onSuccess?: (profile: CandidateProfile) => void
+  onChange?: any
   mode?: 'create' | 'edit'
   className?: string
 }
@@ -118,8 +119,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
         <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Professional Title</label>
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Professional Title</label>
           <input
+            id="title"
             {...register('title')}
             type="text"
             placeholder="e.g., Senior Software Engineer"
@@ -129,8 +131,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label>
+          <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label>
           <textarea
+            id="summary"
             {...register('summary')}
             rows={4}
             placeholder="Write a brief summary of your professional background and goals"
@@ -141,8 +144,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
             <input
+              id="phone"
               {...register('phone')}
               type="tel"
               placeholder="+1 (555) 123-4567"
@@ -151,8 +155,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
             {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+            <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Location</label>
             <input
+              id="location"
               {...register('location')}
               type="text"
               placeholder="San Francisco, CA"
@@ -164,8 +169,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
 
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL</label>
+            <label htmlFor="linkedin_url" className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL</label>
             <input
+              id="linkedin_url"
               {...register('linkedin_url')}
               type="url"
               placeholder="https://linkedin.com/in/..."
@@ -174,8 +180,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
             {errors.linkedin_url && <p className="text-red-600 text-sm mt-1">{errors.linkedin_url.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">GitHub URL</label>
+            <label htmlFor="github_url" className="block text-sm font-medium text-gray-700 mb-1">GitHub URL</label>
             <input
+              id="github_url"
               {...register('github_url')}
               type="url"
               placeholder="https://github.com/..."
@@ -184,8 +191,9 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
             {errors.github_url && <p className="text-red-600 text-sm mt-1">{errors.github_url.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Portfolio URL</label>
+            <label htmlFor="portfolio_url" className="block text-sm font-medium text-gray-700 mb-1">Portfolio URL</label>
             <input
+              id="portfolio_url"
               {...register('portfolio_url')}
               type="url"
               placeholder="https://..."

@@ -43,6 +43,7 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
             <h4 className="font-medium text-gray-900">Experience {index + 1}</h4>
             <button
               type="button"
+              aria-label={`Delete Experience ${index + 1}`}
               onClick={() => removeExperience(index)}
               className="text-red-600 hover:text-red-700"
             >
@@ -51,8 +52,9 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+              <label htmlFor={`exp-company-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Company</label>
               <input
+                id={`exp-company-${index}`}
                 type="text"
                 value={exp.company}
                 onChange={(e) => updateExperience(index, 'company', e.target.value)}
@@ -61,8 +63,9 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Position</label>
+              <label htmlFor={`exp-position-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Position</label>
               <input
+                id={`exp-position-${index}`}
                 type="text"
                 value={exp.position}
                 onChange={(e) => updateExperience(index, 'position', e.target.value)}
@@ -73,8 +76,9 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+              <label htmlFor={`exp-start-date-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
               <input
+                id={`exp-start-date-${index}`}
                 type="date"
                 value={exp.start_date}
                 onChange={(e) => updateExperience(index, 'start_date', e.target.value)}
@@ -82,8 +86,9 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+              <label htmlFor={`exp-end-date-${index}`} className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
               <input
+                id={`exp-end-date-${index}`}
                 type="date"
                 value={exp.end_date || ''}
                 onChange={(e) => updateExperience(index, 'end_date', e.target.value)}
@@ -92,8 +97,9 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+            <label htmlFor={`exp-location-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Location</label>
             <input
+              id={`exp-location-${index}`}
               type="text"
               value={exp.location || ''}
               onChange={(e) => updateExperience(index, 'location', e.target.value)}
@@ -102,8 +108,9 @@ export default function ExperienceInput({ value = [], onChange, className }: Exp
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label htmlFor={`exp-description-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea
+              id={`exp-description-${index}`}
               value={exp.description || ''}
               onChange={(e) => updateExperience(index, 'description', e.target.value)}
               rows={3}

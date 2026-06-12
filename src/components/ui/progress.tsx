@@ -11,6 +11,10 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   ({ className, value = 0, max = 100, ...props }, ref) => (
     <div
       ref={ref}
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-valuenow={value}
       className={`relative h-2 w-full overflow-hidden rounded-full bg-gray-200 ${className || ''}`}
       {...props}
     >
