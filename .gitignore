@@ -28,8 +28,24 @@ yarn-error.log*
 .env*.local
 .env
 
+# database files
+*.db
+*.db-journal
+prisma/*.db
+
 # vercel
 .vercel
+
+# IDE
+.idea/
+.vscode/
+
+# SWC cache
+.swc/
+
+# OS
+Thumbs.db
+.DS_Store
 
 # typescript
 *.tsbuildinfo

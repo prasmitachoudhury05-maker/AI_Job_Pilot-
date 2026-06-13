@@ -1,5 +1,7 @@
 # Phase 2: Candidate Profile Engine - Implementation Summary
 
+> **Note**: This document was written during initial planning and references a Python/FastAPI + separate frontend architecture. The actual implementation is a **Next.js 14 monolith** with Prisma ORM and SQLite. File paths like `backend/` and `frontend/` should be read as `src/` — see the project README for the current structure.
+
 ## Overview
 
 Phase 2 has been successfully implemented, providing complete candidate profile management functionality with resume upload and parsing capabilities. This phase enables users to create, edit, and manage their professional profiles with comprehensive validation and testing.

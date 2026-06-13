@@ -1,5 +1,7 @@
 # Phase 1: Foundation & Infrastructure - Implementation Summary
 
+> **Note**: This document was written during initial planning and references a Python/FastAPI + separate frontend architecture. The actual implementation is a **Next.js 14 monolith** with Prisma ORM and SQLite. File paths like `backend/` and `frontend/` should be read as `src/` — see the project README for the current structure.
+
 ## Overview
 
 Phase 1 has been successfully implemented, establishing the core infrastructure for JobPilot Engine. This phase provides the foundation for all subsequent development phases.

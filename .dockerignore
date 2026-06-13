@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.github
+*.db
+*.db-journal
+.env
+.env.local
+.swc
+coverage
+e2e
+tests
+docs
+deployments
+*.md
+!README.md

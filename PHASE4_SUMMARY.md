@@ -1,5 +1,7 @@
 # Phase 4: Job Ranking Engine - Implementation Summary
 
+> **Note**: This document was written during initial planning and references a Python/FastAPI + separate frontend architecture. The actual implementation is a **Next.js 14 monolith** with Prisma ORM and SQLite. File paths like `backend/` and `frontend/` should be read as `src/` — see the project README for the current structure.
+
 ## Overview
 
 Phase 4 has been successfully implemented, providing a complete AI-powered job ranking engine with explainable AI, confidence scoring, and comprehensive visualization. This phase enables the system to rank jobs based on multiple factors, provide AI-generated explanations, and offer a user-friendly dashboard for exploring rankings.

@@ -1,5 +1,7 @@
 # Phase 3: Job Discovery & Parsing Engine - Implementation Summary
 
+> **Note**: This document was written during initial planning and references a Python/FastAPI + separate frontend architecture. The actual implementation is a **Next.js 14 monolith** with Prisma ORM and SQLite. File paths like `backend/` and `frontend/` should be read as `src/` — see the project README for the current structure.
+
 ## Overview
 
 Phase 3 has been successfully implemented in full, providing complete job discovery, parsing, and deduplication capabilities. This phase enables the system to scrape jobs from 5+ sources, parse and normalize job data, detect duplicates, and provide a comprehensive job discovery UI with automated scheduling.
