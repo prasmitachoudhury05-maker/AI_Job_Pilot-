@@ -84,8 +84,8 @@ Built with **Next.js 14**, **TypeScript**, **Prisma ORM**, **SQLite**, **Groq AI
 
 ```bash
 # Clone the repository
-git clone https://github.com/prasmitachoudhury05-maker/AI_Job_Pilot.git
-cd AI_Job_Pilot
+git clone https://github.com/prasmitachoudhury05-maker/AI_Job_Pilot-.git
+cd AI_Job_Pilot-
 
 # Install dependencies
 npm install
@@ -296,4 +296,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## 📞 Support
 
-For issues and questions, please [open an issue](https://github.com/prasmitachoudhury05-maker/AI_Job_Pilot/issues) on GitHub.
+For issues and questions, please [open an issue](https://github.com/prasmitachoudhury05-maker/AI_Job_Pilot-/issues) on GitHub.
