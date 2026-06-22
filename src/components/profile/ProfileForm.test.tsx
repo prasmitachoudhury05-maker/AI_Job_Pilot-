@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ProfileForm from './ProfileForm'
 
@@ -108,7 +108,7 @@ describe('ProfileForm', () => {
     
     await userEvent.type(titleInput, 'Software Engineer')
     await userEvent.type(summaryInput, 'Test summary')
-    await userEvent.type(skillsField, 'React')
+    await act(async () => { await userEvent.type(skillsField, 'React') })
     
     fireEvent.click(submitButton)
     
@@ -197,7 +197,7 @@ describe('ProfileForm', () => {
     
     await userEvent.type(titleInput, 'Software Engineer')
     await userEvent.type(summaryInput, 'Test summary')
-    await userEvent.type(skillsField, 'React')
+    await act(async () => { await userEvent.type(skillsField, 'React') })
     
     fireEvent.click(submitButton)
     
@@ -220,7 +220,7 @@ describe('ProfileForm', () => {
     
     await userEvent.type(titleInput, 'Software Engineer')
     await userEvent.type(summaryInput, 'Test summary')
-    await userEvent.type(skillsField, 'React')
+    await act(async () => { await userEvent.type(skillsField, 'React') })
     
     fireEvent.click(submitButton)
     

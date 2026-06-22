@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import SkillsInput from './SkillsInput'
 
@@ -27,8 +27,8 @@ describe('SkillsInput', () => {
     const input = screen.getByPlaceholderText('Add a skill...')
     const addButton = screen.getByRole('button', { name: /add/i })
     
-    await userEvent.type(input, 'Python')
-    await userEvent.click(addButton)
+    await act(async () => { await userEvent.type(input, 'Python') })
+    await act(async () => { await userEvent.click(addButton) })
     
     expect(handleChange).toHaveBeenCalledWith(['JavaScript', 'Python'])
   })
@@ -39,7 +39,7 @@ describe('SkillsInput', () => {
     
     const input = screen.getByPlaceholderText('Add a skill...')
     
-    await userEvent.type(input, 'Python{Enter}')
+    await act(async () => { await userEvent.type(input, 'Python{Enter}') })
     
     expect(handleChange).toHaveBeenCalledWith(['JavaScript', 'Python'])
   })
@@ -51,8 +51,8 @@ describe('SkillsInput', () => {
     const input = screen.getByPlaceholderText('Add a skill...')
     const addButton = screen.getByRole('button', { name: /add/i })
     
-    await userEvent.type(input, 'JavaScript')
-    await userEvent.click(addButton)
+    await act(async () => { await userEvent.type(input, 'JavaScript') })
+    await act(async () => { await userEvent.click(addButton) })
     
     expect(handleChange).not.toHaveBeenCalled()
   })
@@ -62,7 +62,7 @@ describe('SkillsInput', () => {
     render(<SkillsInput value={[]} onChange={handleChange} />)
     
     const addButton = screen.getByRole('button', { name: /add/i })
-    await userEvent.click(addButton)
+    await act(async () => { await userEvent.click(addButton) })
     
     expect(handleChange).not.toHaveBeenCalled()
   })
@@ -72,7 +72,7 @@ describe('SkillsInput', () => {
     render(<SkillsInput value={['JavaScript', 'Python']} onChange={handleChange} />)
     
     const removeButtons = screen.getAllByRole('button')
-    await userEvent.click(removeButtons[0])
+    await act(async () => { await userEvent.click(removeButtons[0]) })
     
     expect(handleChange).toHaveBeenCalledWith(['Python'])
   })
@@ -82,8 +82,8 @@ describe('SkillsInput', () => {
     render(<SkillsInput value={['JavaScript']} onChange={handleChange} />)
     
     const input = screen.getByPlaceholderText('Add a skill...')
-    await userEvent.clear(input)
-    await userEvent.keyboard('{Backspace}')
+    await act(async () => { await userEvent.clear(input) })
+    await act(async () => { await userEvent.keyboard('{Backspace}') })
     
     expect(handleChange).toHaveBeenCalledWith([])
   })
@@ -95,8 +95,8 @@ describe('SkillsInput', () => {
     const input = screen.getByPlaceholderText('Add a skill...')
     const addButton = screen.getByRole('button', { name: /add/i })
     
-    await userEvent.type(input, 'Python')
-    await userEvent.click(addButton)
+    await act(async () => { await userEvent.type(input, 'Python') })
+    await act(async () => { await userEvent.click(addButton) })
     
     expect(input).toHaveValue('')
   })
