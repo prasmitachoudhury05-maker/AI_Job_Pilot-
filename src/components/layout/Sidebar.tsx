@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 
 const NAV_ITEMS = [
   { name: 'Analytics', path: '/analytics', icon: LayoutDashboard },
-  { name: 'Job Discovery', path: '/discover', icon: Search },
+  { name: 'Job Discovery', path: '/jobs', icon: Search },
   { name: 'Tailoring Studio', path: '/tailoring', icon: FileEdit },
   { name: 'Cover Letters', path: '/documents', icon: FileText },
   { name: 'App Tracking', path: '/applications', icon: Briefcase },
@@ -36,17 +36,17 @@ export default function Sidebar() {
   }, []);
 
   return (
-    <div className="w-64 bg-slate-900 text-slate-300 h-screen fixed left-0 top-0 flex flex-col border-r border-slate-800 print:hidden z-50">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-          <div className="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
-            <span className="text-white text-lg">J</span>
+    <div className="w-64 bg-black text-amber-200 h-screen fixed left-0 top-0 flex flex-col border-r-2 border-amber-900/50 print:hidden z-50">
+      <div className="p-6 border-b-2 border-amber-900/50">
+        <h1 className="text-3xl font-black text-amber-50 uppercase tracking-tighter flex items-center gap-3">
+          <div className="w-10 h-10 bg-red-600 flex items-center justify-center text-black">
+            <span className="text-2xl">J</span>
           </div>
           JobPilot
         </h1>
       </div>
 
-      <nav className="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
+      <nav className="flex-1 px-4 space-y-2 mt-6 overflow-y-auto">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname.startsWith(item.path);
           const Icon = item.icon;
@@ -55,31 +55,31 @@ export default function Sidebar() {
             <Link 
               key={item.path} 
               href={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors font-medium text-sm ${
+              className={`flex items-center gap-4 px-4 py-3 transition-all duration-200 font-bold text-sm uppercase tracking-wider border-2 ${
                 isActive 
-                  ? 'bg-indigo-600 text-white shadow-sm' 
-                  : 'hover:bg-slate-800 hover:text-white'
+                  ? 'bg-red-600 text-black border-red-600 shadow-[4px_4px_0_#b45309]' 
+                  : 'bg-transparent text-amber-400/80 border-transparent hover:bg-amber-950 hover:text-amber-50 hover:border-amber-800/50 hover:-translate-y-1 hover:shadow-[4px_4px_0_#ff0000]'
               }`}
             >
-              <Icon size={18} className={isActive ? 'text-white' : 'text-slate-400'} />
+              <Icon size={20} className={isActive ? 'text-black' : 'text-red-600'} />
               {item.name}
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-slate-800 flex justify-between items-center">
+      <div className="p-4 border-t-2 border-amber-900/50 flex justify-between items-center">
         {mounted && (
           <button 
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+            className="p-3 bg-amber-950 hover:bg-red-600 text-amber-400/80 hover:text-black transition-colors border-2 border-transparent hover:border-black"
             title="Toggle Dark Mode"
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
         )}
-        <div className="text-xs text-slate-500">
-          JobPilot v1.0
+        <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">
+          Engine v1.0
         </div>
       </div>
     </div>

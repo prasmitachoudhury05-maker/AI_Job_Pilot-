@@ -88,10 +88,10 @@ export default function ApplicationTracking() {
             placeholder="Job ID to track..." 
             value={newJobId}
             onChange={(e) => setNewJobId(e.target.value)}
-            className="border border-gray-300 rounded px-3 py-1"
+            className="border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded px-3 py-1"
             required
           />
-          <button type="submit" className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700">
+          <button type="submit" className="bg-red-600 text-amber-50 px-4 py-1 rounded hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1">
             Log App
           </button>
         </form>
@@ -104,25 +104,25 @@ export default function ApplicationTracking() {
           const columnApps = applications.filter(app => app.status === status);
           
           return (
-            <div key={status} className="bg-gray-100 rounded-lg p-4 w-80 flex-shrink-0 min-h-[500px]">
+            <div key={status} className="bg-black border-2 border-amber-800/50 text-amber-50 rounded-none p-4 w-80 flex-shrink-0 min-h-[500px]">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="font-semibold text-gray-700">{status.replace('_', ' ')}</h2>
-                <span className="bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full text-xs font-bold">
+                <h2 className="font-semibold text-amber-200">{status.replace('_', ' ')}</h2>
+                <span className="bg-gray-200 text-amber-400/80 px-2 py-0.5 rounded-none text-xs font-bold">
                   {columnApps.length}
                 </span>
               </div>
               
               <div className="space-y-3">
                 {columnApps.map(app => (
-                  <div key={app.id} className="bg-white p-4 rounded shadow-sm border border-gray-200 hover:border-blue-400 transition">
-                    <h3 className="font-semibold text-gray-900 truncate" title={app.job?.title}>
+                  <div key={app.id} className="bg-black border-2 border-amber-900/50 p-4 rounded shadow-sm border border-amber-900/50 hover:border-blue-400 transition">
+                    <h3 className="font-semibold text-amber-50 truncate" title={app.job?.title}>
                       {app.job?.title || 'Unknown Job'}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-3">{app.job?.companyName || 'Unknown Company'}</p>
+                    <p className="text-sm text-amber-400/80 mb-3">{app.job?.companyName || 'Unknown Company'}</p>
                     
                     <div className="flex justify-between items-center mt-2 pt-2 border-t border-gray-100">
                       <select 
-                        className="text-xs border-none bg-gray-50 text-gray-600 rounded p-1 cursor-pointer outline-none w-full"
+                        className="text-xs border-none bg-amber-950/50 text-amber-400/80 rounded p-1 cursor-pointer outline-none w-full"
                         value={app.status}
                         onChange={(e) => handleUpdateStatus(app.id, e.target.value)}
                       >

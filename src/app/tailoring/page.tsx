@@ -45,38 +45,38 @@ export default function TailoringDashboard() {
     <div className="container mx-auto p-6 max-w-4xl">
       <h1 className="text-3xl font-bold mb-8">Resume Tailoring Engine</h1>
       
-      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+      <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-md p-6 border border-amber-900/50">
         <h2 className="text-xl font-semibold mb-4">Start New Session</h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-amber-400/80 mb-6">
           Select a resume and a target job to have Groq AI automatically rewrite and optimize your bullet points.
         </p>
 
         {error && (
-          <div className="bg-red-50 text-red-600 p-3 rounded mb-4">
+          <div className="bg-red-900/30 border-2 border-red-600 text-red-500 text-red-600 p-3 rounded mb-4">
             {error}
           </div>
         )}
 
         <form onSubmit={handleStartTailoring} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Resume ID</label>
+            <label className="block text-sm font-medium text-amber-200 mb-1">Resume ID</label>
             <input 
               type="number" 
               required
               value={resumeId}
               onChange={(e) => setResumeId(e.target.value)}
-              className="w-full border border-gray-300 rounded p-2"
+              className="w-full border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded p-2"
               placeholder="e.g. 1"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Job ID</label>
+            <label className="block text-sm font-medium text-amber-200 mb-1">Job ID</label>
             <input 
               type="number" 
               required
               value={jobId}
               onChange={(e) => setJobId(e.target.value)}
-              className="w-full border border-gray-300 rounded p-2"
+              className="w-full border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded p-2"
               placeholder="e.g. 1"
             />
           </div>
@@ -84,7 +84,7 @@ export default function TailoringDashboard() {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors disabled:opacity-50"
+            className="w-full bg-red-600 hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1 text-amber-50 font-semibold py-2 px-4 rounded transition-colors disabled:opacity-50"
           >
             {loading ? 'Generating AI Resume...' : 'Tailor Resume'}
           </button>

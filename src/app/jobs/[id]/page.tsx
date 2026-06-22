@@ -55,9 +55,9 @@ export default function JobDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
+      <div className="min-h-screen bg-transparent py-12 px-4">
         <div className="max-w-4xl mx-auto flex justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-none h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
       </div>
     )
@@ -65,13 +65,13 @@ export default function JobDetailPage() {
 
   if (error || !job) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
+      <div className="min-h-screen bg-transparent py-12 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-xl shadow-lg p-12 text-center">
+          <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-lg p-12 text-center">
             <p className="text-red-600 mb-4">{error || 'Job not found'}</p>
             <button
               onClick={() => router.back()}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="px-6 py-2 bg-red-600 text-amber-50 rounded-none hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1"
             >
               Go Back
             </button>
@@ -82,35 +82,35 @@ export default function JobDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-transparent py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
+          className="flex items-center gap-2 text-amber-400/80 hover:text-amber-50 mb-6"
         >
           <ArrowLeft size={20} />
           Back to Jobs
         </button>
 
         {/* Job Header */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
+        <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-lg p-8 mb-6">
           <div className="flex justify-between items-start mb-6">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{job.title}</h1>
-              <p className="text-xl text-gray-600 font-medium">{job.company}</p>
+              <h1 className="text-3xl font-bold text-amber-50 mb-2">{job.title}</h1>
+              <p className="text-xl text-amber-400/80 font-medium">{job.company}</p>
             </div>
             <button
               onClick={handleSaveJob}
-              className={`p-2 rounded-lg ${
-                isSaved ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-600'
+              className={`p-2 rounded-none ${
+                isSaved ? 'bg-yellow-900/30 border-2 border-yellow-500 text-yellow-500 text-yellow-500' : 'bg-black border-2 border-amber-800/50 text-amber-50 text-amber-400/80'
               } hover:bg-gray-200`}
             >
               <Bookmark size={24} fill={isSaved ? 'currentColor' : 'none'} />
             </button>
           </div>
 
-          <div className="flex flex-wrap gap-4 mb-6 text-gray-600">
+          <div className="flex flex-wrap gap-4 mb-6 text-amber-400/80">
             {job.location && (
               <div className="flex items-center gap-2">
                 <MapPin size={20} />
@@ -139,21 +139,21 @@ export default function JobDetailPage() {
 
           <div className="flex gap-2 mb-6">
             {job.remote && (
-              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-green-900/30 border-2 border-green-500 text-green-500 text-green-500 rounded-none text-sm font-medium">
                 Remote
               </span>
             )}
             {job.experience_level && (
-              <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium capitalize">
+              <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-none text-sm font-medium capitalize">
                 {job.experience_level}
               </span>
             )}
             {job.industry && (
-              <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium capitalize">
+              <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-none text-sm font-medium capitalize">
                 {job.industry}
               </span>
             )}
-            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium capitalize">
+            <span className="px-3 py-1 bg-red-900/30 text-red-300 rounded-none text-sm font-medium capitalize">
               {job.source}
             </span>
           </div>
@@ -162,7 +162,7 @@ export default function JobDetailPage() {
             href={job.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-amber-50 rounded-none hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1 font-medium"
           >
             Apply on {job.source.charAt(0).toUpperCase() + job.source.slice(1)}
             <ExternalLink size={20} />
@@ -171,16 +171,16 @@ export default function JobDetailPage() {
 
         {/* Skills */}
         {job.skills && job.skills.length > 0 && (
-          <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
+          <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-lg p-8 mb-6">
             <div className="flex items-center gap-2 mb-4">
-              <Tag size={24} className="text-gray-600" />
-              <h2 className="text-xl font-semibold text-gray-900">Required Skills</h2>
+              <Tag size={24} className="text-amber-400/80" />
+              <h2 className="text-xl font-semibold text-amber-50">Required Skills</h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {job.skills.map((skill, index) => (
                 <span
                   key={index}
-                  className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium"
+                  className="px-3 py-2 bg-black border-2 border-amber-800/50 text-amber-50 text-amber-200 rounded-none font-medium"
                 >
                   {skill}
                 </span>
@@ -190,15 +190,15 @@ export default function JobDetailPage() {
         )}
 
         {/* Description */}
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Job Description</h2>
-          <div className="prose max-w-none text-gray-700 whitespace-pre-line">
+        <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-lg p-8">
+          <h2 className="text-xl font-semibold text-amber-50 mb-4">Job Description</h2>
+          <div className="prose max-w-none text-amber-200 whitespace-pre-line">
             {job.description}
           </div>
         </div>
 
         {/* Source Info */}
-        <div className="mt-6 text-sm text-gray-500">
+        <div className="mt-6 text-sm text-amber-400/80">
           <p>Source: {job.source.charAt(0).toUpperCase() + job.source.slice(1)}</p>
           <p>Posted: {job.posted_date || 'Recently'}</p>
           {job.sources && job.sources.length > 1 && (

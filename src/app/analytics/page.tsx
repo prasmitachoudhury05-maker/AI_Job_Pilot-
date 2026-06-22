@@ -49,12 +49,12 @@ export default function AnalyticsDashboard() {
       
       <div className="flex justify-between items-center mb-8 print:mb-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Job Search Analytics</h1>
-          <p className="text-gray-500">Performance & Conversion Metrics</p>
+          <h1 className="text-3xl font-bold text-amber-50">Job Search Analytics</h1>
+          <p className="text-amber-400/80">Performance & Conversion Metrics</p>
         </div>
         <button 
           onClick={handleExportPDF}
-          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 print:hidden"
+          className="bg-red-600 text-amber-50 px-4 py-2 rounded hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1 print:hidden"
         >
           Export PDF
         </button>
@@ -62,20 +62,20 @@ export default function AnalyticsDashboard() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <div className="text-sm font-medium text-gray-500 mb-1">Total Applications</div>
-          <div className="text-4xl font-bold text-gray-900">{metrics?.total || 0}</div>
+        <div className="bg-black border-2 border-amber-900/50 p-6 rounded-none shadow-sm border border-amber-900/50">
+          <div className="text-sm font-medium text-amber-400/80 mb-1">Total Applications</div>
+          <div className="text-4xl font-bold text-amber-50">{metrics?.total || 0}</div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <div className="text-sm font-medium text-gray-500 mb-1">Currently Interviewing</div>
-          <div className="text-4xl font-bold text-blue-600">{metrics?.interviewing || 0}</div>
+        <div className="bg-black border-2 border-amber-900/50 p-6 rounded-none shadow-sm border border-amber-900/50">
+          <div className="text-sm font-medium text-amber-400/80 mb-1">Currently Interviewing</div>
+          <div className="text-4xl font-bold text-red-500">{metrics?.interviewing || 0}</div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <div className="text-sm font-medium text-gray-500 mb-1">Offers Received</div>
+        <div className="bg-black border-2 border-amber-900/50 p-6 rounded-none shadow-sm border border-amber-900/50">
+          <div className="text-sm font-medium text-amber-400/80 mb-1">Offers Received</div>
           <div className="text-4xl font-bold text-green-600">{metrics?.offer || 0}</div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <div className="text-sm font-medium text-gray-500 mb-1">Rejections</div>
+        <div className="bg-black border-2 border-amber-900/50 p-6 rounded-none shadow-sm border border-amber-900/50">
+          <div className="text-sm font-medium text-amber-400/80 mb-1">Rejections</div>
           <div className="text-4xl font-bold text-red-500">{metrics?.rejected || 0}</div>
         </div>
       </div>
@@ -83,8 +83,8 @@ export default function AnalyticsDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Funnel Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h2 className="text-xl font-bold mb-6">Application Funnel</h2>
+        <div className="bg-black border-2 border-amber-900/50 p-6 rounded-none shadow-sm border border-amber-900/50">
+          <h2 className="text-2xl font-black uppercase tracking-widest mb-6">Application Funnel</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={funnelData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
@@ -99,8 +99,8 @@ export default function AnalyticsDashboard() {
         </div>
 
         {/* Timeline Chart */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-          <h2 className="text-xl font-bold mb-6">Application Volume (Last 30 Days)</h2>
+        <div className="bg-black border-2 border-amber-900/50 p-6 rounded-none shadow-sm border border-amber-900/50">
+          <h2 className="text-2xl font-black uppercase tracking-widest mb-6">Application Volume (Last 30 Days)</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={timelineData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>

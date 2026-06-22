@@ -109,59 +109,59 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn('space-y-6', className)}>
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+        <div className="p-4 bg-red-900/30 border-2 border-red-600 text-red-500 border border-red-200 rounded-none text-red-500">
           {error}
         </div>
       )}
 
       {/* Basic Information */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
+        <h3 className="text-xl font-black uppercase tracking-wider text-amber-50">Basic Information</h3>
         
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Professional Title</label>
+          <label htmlFor="title" className="block text-sm font-medium text-amber-200 mb-1">Professional Title</label>
           <input
             id="title"
             {...register('title')}
             type="text"
             placeholder="e.g., Senior Software Engineer"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           {errors.title && <p className="text-red-600 text-sm mt-1">{errors.title.message}</p>}
         </div>
 
         <div>
-          <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label>
+          <label htmlFor="summary" className="block text-sm font-medium text-amber-200 mb-1">Professional Summary</label>
           <textarea
             id="summary"
             {...register('summary')}
             rows={4}
             placeholder="Write a brief summary of your professional background and goals"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           {errors.summary && <p className="text-red-600 text-sm mt-1">{errors.summary.message}</p>}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <label htmlFor="phone" className="block text-sm font-medium text-amber-200 mb-1">Phone</label>
             <input
               id="phone"
               {...register('phone')}
               type="tel"
               placeholder="+1 (555) 123-4567"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
           </div>
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+            <label htmlFor="location" className="block text-sm font-medium text-amber-200 mb-1">Location</label>
             <input
               id="location"
               {...register('location')}
               type="text"
               placeholder="San Francisco, CA"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             {errors.location && <p className="text-red-600 text-sm mt-1">{errors.location.message}</p>}
           </div>
@@ -169,35 +169,35 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
 
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label htmlFor="linkedin_url" className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL</label>
+            <label htmlFor="linkedin_url" className="block text-sm font-medium text-amber-200 mb-1">LinkedIn URL</label>
             <input
               id="linkedin_url"
               {...register('linkedin_url')}
               type="url"
               placeholder="https://linkedin.com/in/..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             {errors.linkedin_url && <p className="text-red-600 text-sm mt-1">{errors.linkedin_url.message}</p>}
           </div>
           <div>
-            <label htmlFor="github_url" className="block text-sm font-medium text-gray-700 mb-1">GitHub URL</label>
+            <label htmlFor="github_url" className="block text-sm font-medium text-amber-200 mb-1">GitHub URL</label>
             <input
               id="github_url"
               {...register('github_url')}
               type="url"
               placeholder="https://github.com/..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             {errors.github_url && <p className="text-red-600 text-sm mt-1">{errors.github_url.message}</p>}
           </div>
           <div>
-            <label htmlFor="portfolio_url" className="block text-sm font-medium text-gray-700 mb-1">Portfolio URL</label>
+            <label htmlFor="portfolio_url" className="block text-sm font-medium text-amber-200 mb-1">Portfolio URL</label>
             <input
               id="portfolio_url"
               {...register('portfolio_url')}
               type="url"
               placeholder="https://..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             {errors.portfolio_url && <p className="text-red-600 text-sm mt-1">{errors.portfolio_url.message}</p>}
           </div>
@@ -206,7 +206,7 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
 
       {/* Skills */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Skills</h3>
+        <h3 className="text-xl font-black uppercase tracking-wider text-amber-50">Skills</h3>
         <SkillsInput
           value={watch('skills') || []}
           onChange={(skills) => setValue('skills', skills)}
@@ -216,7 +216,7 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
 
       {/* Experience */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Work Experience</h3>
+        <h3 className="text-xl font-black uppercase tracking-wider text-amber-50">Work Experience</h3>
         <ExperienceInput
           value={watch('experience') || []}
           onChange={(experience) => setValue('experience', experience)}
@@ -225,7 +225,7 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
 
       {/* Education */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Education</h3>
+        <h3 className="text-xl font-black uppercase tracking-wider text-amber-50">Education</h3>
         <EducationInput
           value={watch('education') || []}
           onChange={(education) => setValue('education', education)}
@@ -237,7 +237,7 @@ export default function ProfileForm({ existingProfile, onSuccess, mode = 'create
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 flex items-center gap-2"
+          className="px-6 py-3 bg-red-600 text-amber-50 rounded-none hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1 disabled:bg-zinc-700 flex items-center gap-2"
         >
           {loading ? (
             'Saving...'

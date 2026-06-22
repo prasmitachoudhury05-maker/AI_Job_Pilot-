@@ -72,39 +72,39 @@ export default function DocumentGenerator() {
         
         {/* Left Column: Form & History */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-md p-6 border border-amber-900/50">
             <h2 className="text-xl font-semibold mb-4">Generate New Document</h2>
             
             {error && (
-              <div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm">
+              <div className="bg-red-900/30 border-2 border-red-600 text-red-500 text-red-600 p-3 rounded mb-4 text-sm">
                 {error}
               </div>
             )}
 
             <form onSubmit={handleGenerate} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Resume ID</label>
+                <label className="block text-sm font-medium text-amber-200 mb-1">Resume ID</label>
                 <input 
                   type="number" required
                   value={resumeId} onChange={(e) => setResumeId(e.target.value)}
-                  className="w-full border border-gray-300 rounded p-2"
+                  className="w-full border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded p-2"
                   placeholder="e.g. 1"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Job ID</label>
+                <label className="block text-sm font-medium text-amber-200 mb-1">Job ID</label>
                 <input 
                   type="number" required
                   value={jobId} onChange={(e) => setJobId(e.target.value)}
-                  className="w-full border border-gray-300 rounded p-2"
+                  className="w-full border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded p-2"
                   placeholder="e.g. 1"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                <label className="block text-sm font-medium text-amber-200 mb-1">Type</label>
                 <select 
                   value={documentType} onChange={(e) => setDocumentType(e.target.value)}
-                  className="w-full border border-gray-300 rounded p-2 bg-white"
+                  className="w-full border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded p-2 bg-black border-2 border-amber-900/50"
                 >
                   <option value="COVER_LETTER">Cover Letter</option>
                   <option value="OUTREACH_LINKEDIN">LinkedIn Recruiter Note</option>
@@ -112,10 +112,10 @@ export default function DocumentGenerator() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tone</label>
+                <label className="block text-sm font-medium text-amber-200 mb-1">Tone</label>
                 <select 
                   value={tone} onChange={(e) => setTone(e.target.value)}
-                  className="w-full border border-gray-300 rounded p-2 bg-white"
+                  className="w-full border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded p-2 bg-black border-2 border-amber-900/50"
                 >
                   <option value="Professional">Professional</option>
                   <option value="Enthusiastic">Enthusiastic</option>
@@ -127,27 +127,27 @@ export default function DocumentGenerator() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition-colors disabled:opacity-50 mt-2"
+                className="w-full bg-red-600 hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1 text-amber-50 font-semibold py-2 px-4 rounded transition-colors disabled:opacity-50 mt-2"
               >
                 {loading ? 'AI is writing...' : 'Generate Document'}
               </button>
             </form>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-md p-6 border border-amber-900/50">
             <h2 className="text-xl font-semibold mb-4">Past Documents</h2>
             {documents.length === 0 ? (
-              <p className="text-sm text-gray-500">No documents generated yet.</p>
+              <p className="text-sm text-amber-400/80">No documents generated yet.</p>
             ) : (
               <ul className="space-y-3">
                 {documents.map((doc: any) => (
                   <li 
                     key={doc.id} 
                     onClick={() => setActiveDocument(doc)}
-                    className="p-3 border rounded cursor-pointer hover:bg-gray-50 transition"
+                    className="p-3 border rounded cursor-pointer hover:bg-amber-950/50 transition"
                   >
                     <div className="font-medium text-sm">{doc.documentType.replace('_', ' ')}</div>
-                    <div className="text-xs text-gray-500">{doc.job?.title || 'Unknown Job'} • {doc.tone}</div>
+                    <div className="text-xs text-amber-400/80">{doc.job?.title || 'Unknown Job'} • {doc.tone}</div>
                   </li>
                 ))}
               </ul>
@@ -157,15 +157,15 @@ export default function DocumentGenerator() {
 
         {/* Right Column: Editor/Preview */}
         <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 h-[800px] flex flex-col">
-            <div className="bg-gray-50 border-b p-4 flex justify-between items-center">
-              <h2 className="text-lg font-semibold text-gray-800">
+          <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-md border border-amber-900/50 h-[800px] flex flex-col">
+            <div className="bg-amber-950/50 border-b p-4 flex justify-between items-center">
+              <h2 className="text-xl font-black uppercase tracking-wider text-gray-800">
                 {activeDocument ? activeDocument.documentType.replace('_', ' ') : 'Document Preview'}
               </h2>
               {activeDocument && (
                 <button 
                   onClick={() => navigator.clipboard.writeText(activeDocument.content)}
-                  className="text-sm text-indigo-600 font-medium hover:underline"
+                  className="text-sm text-red-500 font-medium hover:underline"
                 >
                   Copy to Clipboard
                 </button>

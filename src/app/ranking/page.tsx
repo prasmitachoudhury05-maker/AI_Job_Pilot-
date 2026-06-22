@@ -64,9 +64,9 @@ export default function RankingDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4">
+      <div className="min-h-screen bg-transparent py-12 px-4">
         <div className="max-w-7xl mx-auto flex justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+          <div className="animate-spin rounded-none h-12 w-12 border-b-2 border-purple-600"></div>
         </div>
       </div>
     );
@@ -74,10 +74,10 @@ export default function RankingDashboardPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4">
+      <div className="min-h-screen bg-transparent py-12 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-800">{error}</p>
+          <div className="bg-red-900/30 border-2 border-red-600 text-red-500 border border-red-200 rounded-none p-4">
+            <p className="text-red-500">{error}</p>
           </div>
         </div>
       </div>
@@ -85,21 +85,21 @@ export default function RankingDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 py-12 px-4">
+    <div className="min-h-screen bg-transparent py-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+          <h1 className="text-4xl font-bold text-amber-50 mb-2 flex items-center gap-3">
             <TrendingUp className="w-10 h-10 text-purple-600" />
             Job Ranking Dashboard
           </h1>
-          <p className="text-gray-600">
+          <p className="text-amber-400/80">
             AI-powered job matching and ranking based on your profile
           </p>
         </div>
 
         {/* Controls */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-md p-6 mb-6">
           <div className="flex flex-wrap gap-4 items-center justify-between">
             <div className="flex items-center gap-4">
               <label className="flex items-center gap-2">
@@ -109,20 +109,20 @@ export default function RankingDashboardPage() {
                   onChange={(e) => setUseAI(e.target.checked)}
                   className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500"
                 />
-                <span className="text-sm font-medium text-gray-700">Use AI Ranking</span>
+                <span className="text-sm font-medium text-amber-200">Use AI Ranking</span>
               </label>
             </div>
             <div className="flex gap-2">
               <button
                 onClick={handleRefresh}
-                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-amber-50 rounded-none hover:bg-purple-700 transition-colors"
               >
                 <RefreshCw size={16} />
                 Refresh
               </button>
               <button
                 onClick={handleExport}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-amber-50 rounded-none hover:bg-gray-700 transition-colors"
               >
                 <Download size={16} />
                 Export
@@ -130,8 +130,8 @@ export default function RankingDashboardPage() {
             </div>
           </div>
           {useAI && (
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              <p className="text-sm text-gray-600">
+            <div className="mt-4 pt-4 border-t border-amber-900/50">
+              <p className="text-sm text-amber-400/80">
                 API Cost: ${apiCost.toFixed(4)} | Tokens Used: {apiTokens}
               </p>
             </div>
@@ -139,16 +139,16 @@ export default function RankingDashboardPage() {
         </div>
 
         {/* Rankings List */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">Ranked Jobs</h2>
-            <p className="text-sm text-gray-600 mt-1">
+        <div className="bg-black border-2 border-amber-900/50 rounded-none shadow-md overflow-hidden">
+          <div className="p-6 border-b border-amber-900/50">
+            <h2 className="text-xl font-semibold text-amber-50">Ranked Jobs</h2>
+            <p className="text-sm text-amber-400/80 mt-1">
               {rankings.length} jobs ranked by match score
             </p>
           </div>
           
           {rankings.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
+            <div className="p-12 text-center text-amber-400/80">
               No rankings available. Click refresh to load rankings.
             </div>
           ) : (
@@ -157,39 +157,39 @@ export default function RankingDashboardPage() {
                 <div
                   key={ranking.job_id}
                   onClick={() => handleJobClick(ranking.job_id)}
-                  className="p-6 hover:bg-gray-50 cursor-pointer transition-colors"
+                  className="p-6 hover:bg-amber-950/50 cursor-pointer transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                      <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-none flex items-center justify-center">
                         <span className="text-lg font-bold text-purple-600">
                           #{ranking.rank}
                         </span>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">
+                        <h3 className="text-xl font-black uppercase tracking-wider text-amber-50">
                           Job #{ranking.job_id}
                         </h3>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-amber-400/80">
                           Overall Score: {ranking.overall_score.toFixed(1)}%
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-6">
                       <div className="text-right">
-                        <p className="text-sm font-medium text-gray-700">Confidence</p>
+                        <p className="text-sm font-medium text-amber-200">Confidence</p>
                         <p className="text-lg font-bold text-purple-600">
                           {ranking.confidence_score.toFixed(1)}%
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-medium text-gray-700">Skills</p>
-                        <p className="text-lg font-bold text-blue-600">
+                        <p className="text-sm font-medium text-amber-200">Skills</p>
+                        <p className="text-lg font-bold text-red-500">
                           {ranking.skills_match.score.toFixed(1)}%
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-medium text-gray-700">Experience</p>
+                        <p className="text-sm font-medium text-amber-200">Experience</p>
                         <p className="text-lg font-bold text-green-600">
                           {ranking.experience_match.score.toFixed(1)}%
                         </p>
@@ -197,7 +197,7 @@ export default function RankingDashboardPage() {
                     </div>
                   </div>
                   <div className="mt-3">
-                    <p className="text-sm text-gray-600 line-clamp-2">
+                    <p className="text-sm text-amber-400/80 line-clamp-2">
                       {ranking.explanation}
                     </p>
                   </div>

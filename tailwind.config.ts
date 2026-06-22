@@ -45,6 +45,10 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      animation: {
+        'stripe': 'stripe-slide 2s linear infinite',
+        'marquee': 'marquee 15s linear infinite',
+      },
     },
   },
   plugins: [],

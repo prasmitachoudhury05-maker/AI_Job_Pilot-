@@ -40,13 +40,13 @@ export default function SkillsInput({ value = [], onChange, placeholder = 'Add a
         {value.map((skill) => (
           <span
             key={skill}
-            className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+            className="inline-flex items-center gap-1 px-3 py-1 bg-red-900/30 text-red-300 rounded-none text-sm"
           >
             {skill}
             <button
               type="button"
               onClick={() => handleRemoveSkill(skill)}
-              className="hover:text-blue-600"
+              className="hover:text-red-600"
             >
               <X size={14} />
             </button>
@@ -60,12 +60,12 @@ export default function SkillsInput({ value = [], onChange, placeholder = 'Add a
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-3 py-2 border border-2 border-amber-900/50 bg-black text-amber-50 hover:border-red-600 transition-colors rounded-none focus:outline-none focus:ring-2 focus:ring-red-500"
         />
         <button
           type="button"
           onClick={handleAddSkill}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center gap-2"
+          className="px-4 py-2 bg-red-600 text-amber-50 rounded-none hover:bg-black hover:text-red-600 hover:border-red-600 border-2 border-transparent transition-all hover:-translate-y-1 flex items-center gap-2"
         >
           <Plus size={16} />
           Add
